@@ -85,29 +85,25 @@
             display: block;
         }
     </style>
+    <script type="module" src="https://js.withorbit.com/orbit-web-component.js"></script>
 </head>
 <body>
     <div class="orbit">
         <div class="header">Brain Development and Therapy</div>
-        <div class="section">
-            <div class="section-header" onclick="toggleSection(this)">1. Sequence of Brain Development</div>
-            <div class="section-content">
-                <p>The brain develops sequentially, starting with lower primitive regions (e.g., brain stem and diencephalon), then the limbic region, and finally the cerebral cortex.</p>
-            </div>
-        </div>
-        <div class="section">
-            <div class="section-header" onclick="toggleSection(this)">2. Functions of Lower Brain Structures</div>
-            <div class="section-content">
-                <p>Core body functions such as heart rate, sleep/wake cycles, temperature, and respiration are regulated by lower brain structures.</p>
-            </div>
-        </div>
-        <div class="section">
-            <div class="section-header" onclick="toggleSection(this)">3. Development Period for Lower Brain Structures</div>
-            <div class="section-content">
-                <p>Lower brain structures primarily develop in utero.</p>
-            </div>
-        </div>
-        <!-- Add the remaining sections here in the same format -->
+        <orbit-reviewarea color="cyan">
+            <orbit-prompt
+                question="In what sequence does the brain develop?"
+                answer="The brain develops sequentially, starting with lower primitive regions (e.g., brain stem and diencephalon), then the limbic region, and finally the cerebral cortex."
+            ></orbit-prompt>
+            <orbit-prompt
+                question="What functions are regulated by lower brain structures?"
+                answer="Core body functions such as heart rate, sleep/wake cycles, temperature, and respiration are regulated by lower brain structures."
+            ></orbit-prompt>
+            <orbit-prompt
+                question="When do lower brain structures primarily develop?"
+                answer="Lower brain structures primarily develop in utero."
+            ></orbit-prompt>
+        </orbit-reviewarea>
 
         <div class="controls">
             <button class="button" id="prev-btn">Previous</button>
@@ -147,7 +143,6 @@
         });
 
         document.getElementById('load-more').addEventListener('click', () => {
-            // Load additional content here, e.g., via AJAX or Fetch API
             document.getElementById('additional-content').innerHTML = `
                 <div class="section">
                     <div class="section-header" onclick="toggleSection(this)">Additional Card</div>
@@ -158,7 +153,6 @@
             `;
         });
 
-        // Initially display the first section
         showSection(currentSectionIndex);
     </script>
 </body>
