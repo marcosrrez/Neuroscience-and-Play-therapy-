@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brain Development and Therapy Orbit</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .orbit {
+            width: 80%;
+            height: 80%;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            background: #fff;
+        }
+        .header {
+            background-color: #007bff;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            font-size: 1.5em;
+        }
+        .card {
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            padding: 20px;
+            text-align: center;
+        }
+        .card.active {
+            opacity: 1;
+        }
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 20px;
+            background-color: #f4f4f9;
+        }
+        .button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+        .section {
+            border: 1px solid #ddd;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .section-content {
+            display: none;
+            padding: 10px 0;
+        }
+        .section-header {
+            cursor: pointer;
+            font-weight: bold;
+            color: #007bff;
+        }
+        .reference {
+            text-decoration: underline;
+            color: #007bff;
+            cursor: pointer;
+            position: relative;
+        }
+        .tooltip {
+            display: none;
+            position: absolute;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            padding: 5px;
+            border-radius: 5px;
+            width: 200px;
+            z-index: 10;
+        }
+        .reference:hover .tooltip {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="orbit">
+        <div class="header">Brain Development and Therapy</div>
+        <div id="cards-container">
+            <div class="card active" id="card-1">
+                <h2>1. Sequence of Brain Development</h2>
+                <p>The brain develops sequentially, starting with lower primitive regions (e.g., brain stem and diencephalon), then the limbic region, and finally the cerebral cortex.</p>
+            </div>
+            <div class="card" id="card-2">
+                <h2>2. Functions of Lower Brain Structures</h2>
+                <p>Core body functions such as heart rate, sleep/wake cycles, temperature, and respiration are regulated by lower brain structures.</p>
+            </div>
+            <div class="card" id="card-3">
+                <h2>3. Development Period for Lower Brain Structures</h2>
+                <p>Lower brain structures primarily develop in utero.</p>
+            </div>
+            <!-- Add the remaining cards here in the same format -->
+        </div>
+        <div class="controls">
+            <button class="button" id="prev-btn">Previous</button>
+            <button class="button" id="next-btn">Next</button>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-header" onclick="toggleSection(this)">What is Brain Development?</div>
+        <div class="section-content">Detailed content about brain development goes here...</div>
+    </div>
+
+    <p>Understanding brain development is crucial <span class="reference">[1]<span class="tooltip">Brain Development 101: Basics and Beyond</span></span>.</p>
+
+    <button class="button" id="load-more">Load More</button>
+    <div id="additional-content"></div>
+
+    <script>
+        let currentCardIndex = 0;
+        const cards = document.querySelectorAll('.card');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+
+        function showCard(index) {
+            cards.forEach((card, i) => {
+                card.classList.toggle('active', i === index);
+            });
+        }
+
+        prevBtn.addEventListener('click', () => {
+            currentCardIndex = (currentCardIndex - 1 + cards.length) % cards.length;
+            showCard(currentCardIndex);
+        });
+
+        nextBtn.addEventListener('click', () => {
+            currentCardIndex = (currentCardIndex + 1) % cards.length;
+            showCard(currentCardIndex);
+        });
+
+        function toggleSection(header) {
+            const content = header.nextElementSibling;
+            content.style.display = content.style.display === 'block' ? 'none' : 'block';
+        }
+
+        document.getElementById('load-more').addEventListener('click', () => {
+            // Load additional content here, e.g., via AJAX or Fetch API
+            document.getElementById('additional-content').innerHTML = `
+                <div class="card">
+                    <h2>Additional Card</h2>
+                    <p>More information dynamically loaded...</p>
+                </div>
+            `;
+        });
+    </script>
+</body>
+</html>
